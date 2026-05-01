@@ -7,7 +7,7 @@ import streamlit as st
 df_25 = pd.read_csv("~/Desktop/stats-2.csv")
 df_24 = pd.read_csv("~/Desktop/stats-3.csv")
 #this is every pitch of the 2025 season
-url = "https://drive.google.com/uc?id=1_TrBeDgQVRi2bno6taX1sDcBxCpQhrmB"
+url = "https://drive.google.com/uc?export=download&id=1_TrBeDgQVRi2bno6taX1sDcBxCpQhrmB"
 pitch = pd.read_csv(url)
 
 #clean data by only taking numbers and dropping some variables

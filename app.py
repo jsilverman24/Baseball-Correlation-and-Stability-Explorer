@@ -7,7 +7,7 @@ import gdown
 #load Dataframes for 24 and 25 years
 @st.cache_data
 def load_pitch_data():
-    url = "https://drive.google.com/uc?id=1_TrBeDgQVRi2bno6taX1sDcBxCpQhrmB"
+    url = "https://drive.google.com/uc?id=1KDJ5NLOX7Z0zpAxlW3uVCiUTPWw9dLyP"
     gdown.download(url, "pitches_25.csv", quiet=False)
     return pd.read_csv("pitches_25.csv")
 

@@ -3,13 +3,22 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from scipy import stats
 import streamlit as st
+import gdown
 #load Dataframes for 24 and 25 years
-df_25 = pd.read_csv("~/Desktop/stats-2.csv")
-df_24 = pd.read_csv("~/Desktop/stats-3.csv")
-#this is every pitch of the 2025 season
-url = "https://drive.google.com/uc?export=download&id=1_TrBeDgQVRi2bno6taX1sDcBxCpQhrmB"
-pitch = pd.read_csv(url)
+@st.cache_data
+def load_pitch_data():
+    url = "https://drive.google.com/uc?id=1_TrBeDgQVRi2bno6taX1sDcBxCpQhrmB"
+    gdown.download(url, "pitches_25.csv", quiet=False)
+    return pd.read_csv("pitches_25.csv")
 
+@st.cache_data
+def load_stat_data():
+    df_25 = pd.read_csv("stats-2.csv")
+    df_24 = pd.read_csv("stats-3.csv")
+    return df_25, df_24
+
+pitch = load_pitch_data()
+df_25, df_24 = load_stat_data()
 #clean data by only taking numbers and dropping some variables
 corrs_df_24 = df_24.select_dtypes('number')
 corrs_df_24 = corrs_df_24.drop(['b_rbi', 'b_lob', 'player_age','b_total_bases', 'r_total_caught_stealing', 'r_total_stolen_base', 'b_ab_scoring', 'b_ball', 'b_called_strike', 'b_catcher_interf', 'b_foul', 'b_foul_tip', 'b_game', 'b_gnd_into_dp', 'b_gnd_into_tp', 'b_gnd_rule_double', 'b_hit_by_pitch', 'b_hit_ground', 'b_hit_fly', 'b_hit_into_play', 'b_hit_line_drive', 'b_hit_popup', 'b_out_fly', 'b_out_ground', 'b_out_line_drive', 'b_out_popup','flareburner_percent', 'poorlyunder_percent', 'poorlytopped_percent', 'poorlyweak_percent','pitch_count_offspeed', 'pitch_count_fastball', 'pitch_count_breaking', 'pitch_count','maxeff_arm_2b_3b_sba', 'n_outs_above_average', 'rel_league_reaction_distance', 'rel_league_burst_distance', 'rel_league_routing_distance',

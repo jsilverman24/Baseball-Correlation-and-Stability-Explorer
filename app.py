@@ -49,7 +49,7 @@ if x_year == 2024:
     x_var = st.selectbox("Choose X variable",stat_cols_24)
     x_df = corrs_df_24
 else:
-    x_var = st.selectbox("Choose X variable", stat_cols_24)
+    x_var = st.selectbox("Choose X variable", stat_cols_25)
     x_df = corrs_df_25
 if y_year == 2024:
     y_var = st.selectbox("Choose Y variable",stat_cols_25)
@@ -114,7 +114,7 @@ if x_var:
     # get max pa from all the batters and take the 90th percentile. make it an int so it can be in range
     max_pa = int(pa_level.groupby('batter')['pa_num'].max().quantile(0.9))
     # create thresholds
-    min_pa = 100
+    min_pa = 0
     thresholds = range(min_pa, max_pa, 10)
     results = []
     #run for each threshold
@@ -159,5 +159,5 @@ if x_var:
     fig,ax = plt.subplots()
     sns.lineplot(data = results_df, x = 'pa', y = 'correlation', ax = ax)
     plt.axhline(y = .707,color='red',linestyle='--')
-    st.write("Stabilizes at .707 R^2")
+    st.write("Stabilizes at Spearman-Brown of.707, where R^2 is 0.50 and 50% of the variance is explained")
     st.pyplot(fig)
